@@ -1,0 +1,31 @@
+{
+  "name": "tag-element",
+  "authors": [
+    "Charbel Rami"
+  ],
+  "description": "",
+  "main": "tag-element.html",
+  "moduleType": [],
+  "keywords": [
+    "tag",
+    "git",
+    "github",
+    "api",
+    "polymer",
+    "custom-element",
+    "web-components"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-ajax": "PolymerElements/iron-ajax#~1.1.1",
+    "polymer": "~1.2.3"
+  }
+}

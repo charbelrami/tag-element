@@ -1,0 +1,63 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<dom-module id="tag-element">
+  <template>
+    <iron-ajax url="https://api.github.com/repos/{{owner}}/{{repo}}/tags" handle-as="json" last-response="{{data}}" auto></iron-ajax>
+
+    <iron-ajax url="{{tag.commit.url}}" handle-as="json" last-response="{{commitData}}" auto></iron-ajax>
+
+    <template is="dom-if" if="{{name}}">
+      {{tag.name}}
+    </template>
+
+    <template is="dom-if" if="{{commitSha}}">
+      {{tag.commit.sha}}
+    </template>
+
+    <template is="dom-if" if="{{commitUrl}}">
+      {{commitData.html_url}}
+    </template>
+
+    <template is="dom-if" if="{{zip}}">
+      {{tag.zipball_url}}
+    </template>
+
+    <template is="dom-if" if="{{tar}}">
+      {{tag.tarball_url}}
+    </template>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'tag-element',
+
+        properties: {
+          owner: String,
+          repo: String,
+          tagIndex: {
+            type: Number,
+            value: 0
+          },
+          name: Boolean,
+          commitSha: Boolean,
+          commitUrl: Boolean,
+          zip: Boolean,
+          tar: Boolean
+        },
+
+        observers: [
+          '_getTagData(data.*)'
+        ],
+
+        _getTagData: function(obj) {
+          var keys = Object.keys(obj);
+          this.tag = obj[keys[1]][this.tagIndex];
+        }
+      });
+    }());
+  </script>
+</dom-module>
